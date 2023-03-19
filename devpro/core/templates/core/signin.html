@@ -1,0 +1,63 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Cadastro</title>
+    <!-- CSS files -->
+    <link href="{% static 'css/tabler.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/tabler-flags.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/tabler-payments.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/tabler-vendors.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/demo.min.css' %}" rel="stylesheet"/>
+    <style>
+      @import url('https://rsms.me/inter/inter.css');
+      :root {
+      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+      body {
+      	font-feature-settings: "cv03", "cv04", "cv11";
+      }
+    </style>
+  </head>
+  <body class=" d-flex flex-column">
+    <script src="{% static 'js/demo-theme.min.js' %}"></script>
+    <div class="page page-center">
+      <div class="container container-tight py-4">
+         <div class="card card-md">
+          <div class="card-body">
+            <h2 class="h2 text-center mb-4">Login to your account</h2>
+            {% with WIDGET_ERROR_CLASS="is-invalid" %}
+            <form action="{% url 'core:login' %}" method="post" autocomplete="off" novalidate>
+              {% csrf_token %}
+              <div class="mb-3">
+                <label class="form-label" for="{{ form.username.id_for_label }}">Email address or CPF</label>
+                {% render_field form.username class="form-control" %}
+              </div>
+              <div class="mb-2">
+                <label class="form-label">
+                  Password
+                </label>
+                <div class="input-group input-group-flat">
+                {% render_field form.password class="form-control" placeholder="Your password" %}
+                </div>
+              </div>
+              <div class="form-footer">
+                <button type="submit" class="btn btn-primary w-100">Sign in</button>
+              </div>
+            </form>
+            {% endwith %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Libs JS -->
+    <!-- Tabler Core -->
+    <script src="{% static 'js/tabler.min.js' %}" defer></script>
+    <script src="{% static 'js/demo.min.js'%}" defer></script>
+  </body>
+</html>
